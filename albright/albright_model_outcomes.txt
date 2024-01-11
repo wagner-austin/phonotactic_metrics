@@ -1,0 +1,26 @@
+Training data: English CMU with frequencies
+Test data: Albright & Hayes (2003) onset data
+
+Results based on original ARPABET column assuming no mistakes:
+
+                             intercept    uni_coef     bi_coef interaction_coef      AIC
+uni_bi_smoothed_model         4.605585  0.36209891  0.27220525       0.08450484 122.8156
+uni_bi_freq_smooth_model      4.607230  0.39602494  0.22871390       0.08305805 123.1093
+uni_bi_freq_model             4.627979  0.51806708 -0.04896233       0.08415817 124.1875
+uni_bi_model                  4.628459  0.51091901 -0.04481849       0.08346214 124.2732
+pos_uni_bi_freq_model         4.741484 -0.10715303  0.14346664      -0.07536840 129.4050
+pos_uni_bi_freq_smooth_model  4.741002 -0.10700576  0.14323890      -0.07475432 129.4094
+pos_uni_bi_model              4.722261 -0.09987996  0.13587452      -0.05045656 129.6313
+pos_uni_bi_smooth_model       4.720850 -0.09919266  0.13487615      -0.04865028 129.6416
+
+Results based on fixing mistakes in ARPABET column ("F LEH" -> "F L EH T"):
+
+                             intercept   uni_coef    bi_coef interaction_coef      AIC
+uni_bi_smoothed_model         4.691618  0.1567586 0.11674452      -0.01863812 123.1244
+uni_bi_freq_smooth_model      4.689714  0.1679428 0.10044149      -0.01575507 123.4359
+uni_bi_model                  4.700826  0.2233744 0.07285515      -0.14095500 123.9651
+uni_bi_freq_model             4.696412  0.2228886 0.05175946      -0.11227092 124.1383
+pos_uni_bi_freq_model         4.721616 -0.1193421 0.13720192      -0.05067184 129.5624
+pos_uni_bi_freq_smooth_model  4.721110 -0.1191061 0.13690430      -0.05002424 129.5658
+pos_uni_bi_model              4.701557 -0.1098687 0.12716526      -0.02459965 129.7061
+pos_uni_bi_smooth_model       4.700026 -0.1088227 0.12585162      -0.02264592 129.7135
