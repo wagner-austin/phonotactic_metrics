@@ -1,0 +1,26 @@
+Training data: UCLA Polish onsets
+Test data: Polish word set matched with onsets in IbexHeads
+
+Results before scaling data:
+
+                                intercept     uni_coef      bi_coef interaction_coef      AIC      BIC    logLik
+uni_bi_freq_smooth_model        11.063813    0.5113651 9.388818e-01     6.070811e-02 44608.69 44660.94 -22297.35
+uni_bi_smoothed_model           11.297558    0.5172404 9.772374e-01     6.360415e-02 44798.92 44851.16 -22392.46
+pos_uni_bi_freq_smooth_model -5630.524712 4797.4500281 5.615216e+03    -4.780873e+03 44835.34 44887.58 -22410.67
+pos_uni_bi_freq_model        -2446.273918 2078.2250407 2.434975e+03    -2.065113e+03 44836.69 44888.94 -22411.35
+uni_bi_freq_model                6.328826    0.3420022 9.513527e-02     9.352688e-03 44849.67 44901.91 -22417.83
+uni_bi_model                     5.225593    0.1956514 9.317823e-02     8.984553e-03 44883.97 44936.21 -22434.98
+pos_uni_bi_smooth_model      -3909.210459 3155.7848880 3.888945e+03    -3.134647e+03 44907.11 44959.35 -22446.55
+pos_uni_bi_model             -1035.576505  829.0077844 1.019935e+03    -8.117982e+02 44908.04 44960.29 -22447.02
+
+Results after scaling data:
+
+                                intercept      uni_coef      bi_coef interaction_coef      AIC      BIC    logLik
+uni_bi_freq_smooth_model         3.086845  -0.007311583    0.7249234       0.07743836 44608.69 44660.94 -22297.35
+uni_bi_smoothed_model            3.091428  -0.024268401    0.6888169       0.06452755 44798.92 44851.16 -22392.46
+pos_uni_bi_freq_smooth_model     3.229772   0.306097799    0.5810874      -0.19084049 44835.34 44887.58 -22410.67
+pos_uni_bi_freq_model            3.228876   0.304681114    0.5809770      -0.18967221 44836.69 44888.94 -22411.35
+uni_bi_freq_model                3.051813   0.057924409    0.6312368       0.18116799 44849.67 44901.91 -22417.83
+uni_bi_model                     3.050913  -0.033115205    0.6743768       0.15338898 44883.97 44936.21 -22434.98
+pos_uni_bi_smooth_model          3.140697   0.422462279    0.3481761      -0.05221000 44907.11 44959.35 -22446.55
+pos_uni_bi_model                 3.140456   0.421747843    0.3483909      -0.05174562 44908.04 44960.29 -22447.02
