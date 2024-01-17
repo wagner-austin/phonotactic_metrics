@@ -1,0 +1,12 @@
+Training data: Onset type frequencies data
+Test data: Scholes onset data
+
+                              intercept    uni_coef   bi_coef interaction_coef        AIC
+uni_bi_freq_smooth_model     -0.6335191 -0.19539259 2.6506320       1.06372960 -63.340660
+uni_bi_smoothed_model        -0.8866576 -1.01252656 4.0274495       1.32015865 -52.724136
+uni_bi_freq_model             0.3997418  0.07643011 0.2987147       0.03754152 -41.586539
+uni_bi_model                  0.4212592  0.02952096 0.3311717      -0.03371167 -41.483812
+pos_uni_bi_model              0.6038288  0.02805322 0.5510430      -0.33221393 -35.359606
+pos_uni_bi_freq_smooth_model  0.4444899  0.16805048 0.2228382      -0.05682267 -32.715618
+pos_uni_bi_freq_model         0.4304987  0.18218322 0.2004075      -0.03437517 -30.240734
+pos_uni_bi_smooth_model       0.4451272  0.18553079 0.1756629      -0.05275915  -9.357285
