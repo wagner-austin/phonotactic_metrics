@@ -1,0 +1,14 @@
+Training data: English CMU with frequencies
+Test data: White/Hayes data
+Results based on modified ARPABET column with fixes: 
+'T W I K AH N' -> 'T W IH K AH N' and 'C AH N IH F L' -> 'K AH N IH F L'
+
+                             intercept    uni_coef   bi_coef interaction_coef      AIC      BIC    logLik
+uni_bi_freq_smooth_model      4.398917 -0.35492925 0.5214653      0.028903146 12338.83 12377.45 -6163.414
+uni_bi_smoothed_model         4.394330 -0.40439849 0.5571102      0.033355609 12346.60 12385.23 -6167.302
+uni_bi_model                  4.395951 -0.10857672 0.2952279      0.074904046 12713.94 12752.56 -6350.968
+uni_bi_freq_model             4.396629 -0.10708851 0.2939998      0.073722926 12715.45 12754.07 -6351.724
+pos_uni_bi_freq_model         4.428116 -0.02099457 0.1836667     -0.009247212 13009.03 13047.65 -6498.514
+pos_uni_bi_freq_smooth_model  4.427970 -0.02088508 0.1830678     -0.009064299 13009.36 13047.99 -6498.682
+pos_uni_bi_model              4.430599 -0.03756240 0.1975353     -0.012037464 13013.83 13052.45 -6500.913
+pos_uni_bi_smooth_model       4.430150 -0.03709076 0.1955276     -0.011474266 13014.93 13053.56 -6501.467
