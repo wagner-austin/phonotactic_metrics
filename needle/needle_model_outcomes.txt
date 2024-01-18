@@ -1,0 +1,8 @@
+Training data: Dataset used by Needle paper (see needle-cmu-train.txt)
+Test data: Needle data
+
+                          intercept   uni_coef   bi_coef interaction_coef      AIC      BIC    logLik
+uni_bi_smoothed_model      2.366731 -0.8971812 1.3033570       0.36893286 567744.2 567815.7 -283865.1
+uni_bi_model               2.407682 -0.3797821 0.7496555       0.34032865 568349.1 568420.6 -284167.5
+pos_uni_bi_model           2.767541 -0.1613208 0.2743793      -0.06534974 570113.7 570185.2 -285049.9
+pos_uni_bi_smoothed_model  2.767438 -0.1612551 0.2741512      -0.06520308 570114.1 570185.6 -285050.1
