@@ -5,12 +5,12 @@ Note: polr does not give a singular intercept since ratings are treated as facto
 Intercepts are given for 1|2, 2|3, ...
 Results based on scaled data and rounded ratings from Daland dataset:
 
-                                  uni_coef   bi_coef interaction_coef      AIC
-uni_bi_pos_model               -0.02947221 1.3794369        0.6531745 241.3032
-uni_bi_pos_freq_model          -0.04303463 1.3355112        0.6571417 244.8596
-pos_uni_bi_freq_smoothed_model -0.30243391 1.4731063       -0.1646767 253.2503
-pos_uni_bi_freq_model          -0.29727687 1.4614289       -0.1608989 253.4746
-pos_uni_bi_smoothed_model      -0.23057532 1.3885843       -0.1284196 253.5006
-pos_uni_bi_model               -0.21280642 1.3515804       -0.1161717 254.1641
-uni_bi_freq_model              -0.01703893 0.6499802        0.3144866 276.0017
-uni_bi_model                   -0.02404853 0.6500430        0.3127671 276.0485
+                               intercept1_2 intercept2_3 intercept3_4 intercept4_5    uni_coef   bi_coef interaction_coef     AIC
+uni_bi_smoothed_model             -2.458997  -0.05449412    1.1358901     4.680858 -0.02947221 1.3794369        0.6531745 241.3032
+uni_bi_freq_smooth_model          -2.378672  -0.03030143    1.1367099     4.566787 -0.04303463 1.3355112        0.6571417 244.8596
+pos_uni_bi_freq_smoothed_model    -2.595980  -0.31555982    0.7468358     4.105680 -0.30243391 1.4731063       -0.1646767 253.2503
+pos_uni_bi_freq_model             -2.590243  -0.31212882    0.7484439     4.099700 -0.29727687 1.4614289       -0.1608989 253.4746
+pos_uni_bi_smoothed_model         -2.566562  -0.28743157    0.7699382     4.118090 -0.23057532 1.3885843       -0.1284196 253.5006
+pos_uni_bi_model                  -2.548022  -0.27652089    0.7754209     4.102991 -0.21280642 1.3515804       -0.1161717 254.1641
+uni_bi_freq_model                 -1.992349   0.02216637    0.8995425     3.677911 -0.01703893 0.6499802        0.3144866 276.0017
+uni_bi_model                      -1.989939   0.02538633    0.9014432     3.677343 -0.02404853 0.6500430        0.3127671 276.0485
