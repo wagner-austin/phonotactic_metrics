@@ -1,0 +1,12 @@
+Training data: Subtitle tokens from ESPal database
+Test data: Spanish test data
+
+                             intercept  uni_coef  bi_coef interaction_coef      AIC      BIC    logLik
+uni_bi_smoothed_model         52.02562 -1.497784 7.714142         1.157532 223090.9 223147.6 -111538.5
+uni_bi_model                  51.86340 -1.514310 6.689718         1.489269 223316.5 223373.2 -111651.3
+uni_bi_freq_model             51.85055 -1.557000 6.705165         1.518694 223491.4 223548.0 -111738.7
+uni_bi_freq_smooth_model      51.95908 -1.631223 7.859796         1.355284 223491.4 223548.1 -111738.7
+pos_uni_bi_smoothed_model     53.50652 -2.856854 5.905599        -2.041724 223700.0 223748.6 -111844.0
+pos_uni_bi_model              53.50622 -2.857039 5.904786        -2.041145 224598.5 224647.1 -112293.3
+pos_uni_bi_freq_model         53.58561 -2.416501 5.942544        -2.068397 225432.1 225480.6 -112710.0
+pos_uni_bi_freq_smooth_model  53.58578 -2.415590 5.942425        -2.068851 225432.3 225480.8 -112710.1
