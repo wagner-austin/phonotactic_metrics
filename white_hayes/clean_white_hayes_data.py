@@ -24,4 +24,4 @@ df_metric.replace(float('-inf'), -50, inplace=True)
 df_metric["rating"] = ratings
 if "subject" not in df_metric.columns:
     df_metric.insert(loc=0, column="subject", value=subjects)
-df_metric.to_csv(f"{dir}white_hayes_fixed_metric_output.csv", index=False)
+df_metric.to_csv(f"{dir}white_hayes_cleaned_metric_output.csv", index=False)
