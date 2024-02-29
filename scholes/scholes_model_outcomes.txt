@@ -10,3 +10,15 @@ pos_uni_bi_model              0.6038288  0.02805322 0.5510430      -0.33221393 -
 pos_uni_bi_freq_smooth_model  0.4444899  0.16805048 0.2228382      -0.05682267 -32.715618
 pos_uni_bi_freq_model         0.4304987  0.18218322 0.2004075      -0.03437517 -30.240734
 pos_uni_bi_smooth_model       0.4451272  0.18553079 0.1756629      -0.05275915  -9.357285
+
+Model outcomes when using binomial family (logistic regression with proportions as outcomes):
+
+                                intercept    uni_coef   bi_coef interaction_coef      AIC
+uni_bi_freq_smooth_model     -6.146847135 -0.57341483 14.210102        5.8685529 34.99408
+uni_bi_smoothed_model        -7.421446258 -5.73951546 21.992149        7.0807643 37.35251
+pos_uni_bi_freq_smooth_model -0.111979240  0.70349119  1.653701       -0.4852796 37.56650
+uni_bi_freq_model            -0.538837679  0.86182312  1.333766        0.6193869 37.77653
+uni_bi_model                 -0.253759800  0.23801961  1.764843       -0.3276938 37.78591
+pos_uni_bi_freq_model        -0.250157107  0.84139546  1.387535       -0.2188739 38.09191
+pos_uni_bi_model              0.701413151  0.06254442  3.191272       -1.9396055 39.76660
+pos_uni_bi_smooth_model      -0.005949382  0.67075174  2.321220       -1.2565641 41.47684
