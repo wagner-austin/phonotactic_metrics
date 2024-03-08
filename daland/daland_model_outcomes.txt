@@ -15,14 +15,14 @@ pos_uni_bi_model                  -2.548022  -0.27652089    0.7754209     4.1029
 uni_bi_freq_model                 -1.992349   0.02216637    0.8995425     3.677911 -0.01703893 0.6499802        0.3144866 276.0017
 uni_bi_model                      -1.989939   0.02538633    0.9014432     3.677343 -0.02404853 0.6500430        0.3127671 276.0485
 
-Results based on linear regression (glm):
+Results based on linear regression (glm) and un-rounded original Likert ratings:
 
-                               intercept     uni_coef   bi_coef interaction_coef      AIC
-uni_bi_smoothed_model           2.659899 -0.028576159 0.6452843       0.27267070 254.0826
-uni_bi_freq_smooth_model        2.651879 -0.034994587 0.6433813       0.28316827 257.0216
-pos_uni_bi_freq_smoothed_model  2.801545 -0.084126912 0.6846094      -0.08589431 266.9677
-pos_uni_bi_smoothed_model       2.790107 -0.056189488 0.6518635      -0.07103647 267.0626
-pos_uni_bi_freq_model           2.800317 -0.082050041 0.6801108      -0.08409721 267.1918
-pos_uni_bi_model                2.786119 -0.049027706 0.6376979      -0.06526923 267.7139
-uni_bi_freq_model               2.663870 -0.006367015 0.4058042       0.18575104 288.7356
-uni_bi_model                    2.663131 -0.010574507 0.4065964       0.18508096 288.7779
+                               intercept    uni_coef   bi_coef interaction_coef      AIC
+uni_bi_smoothed_model           2.627962 -0.07404686 0.6739094       0.29940930 242.3623
+uni_bi_freq_smooth_model        2.619214 -0.08327317 0.6810341       0.31074898 244.6210
+pos_uni_bi_freq_smoothed_model  2.751346 -0.06492244 0.6688389      -0.04974550 258.4595
+pos_uni_bi_freq_model           2.749972 -0.06262447 0.6640255      -0.04778775 258.7186
+pos_uni_bi_smoothed_model       2.737388 -0.03431031 0.6260560      -0.03082952 259.4503
+pos_uni_bi_model                2.733051 -0.02656453 0.6111693      -0.02467120 260.1755
+uni_bi_freq_model               2.630097 -0.04771925 0.4193662       0.20942586 284.3024
+uni_bi_model                    2.630957 -0.05115240 0.4152210       0.20457212 284.5383

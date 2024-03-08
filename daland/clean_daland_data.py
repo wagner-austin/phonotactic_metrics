@@ -17,5 +17,5 @@ df["word"].to_csv(f"{dir}daland-test-data.csv", index=False, header=False)
 # Clean metric output csv
 df_metric = pd.read_csv(f"{dir}daland_original_metric_output.csv")
 df_metric.replace(float('-inf'), -50, inplace=True)
-df_metric["rating"] = round(df["likert_rating"])
+df_metric["rating"] = df["likert_rating"]
 df_metric.to_csv(f"{dir}daland_cleaned_metric_output.csv", index=False)
