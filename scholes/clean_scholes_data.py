@@ -34,6 +34,6 @@ with open(f"{dir}scholes_cleaned_test_data.csv", "w") as file:
 
 # Clean metric output csv
 df = pd.read_csv(f"{dir}scholes_original_metric_output.csv")
-df.replace(float('-inf'), -50, inplace=True)
+df.replace(float('-inf'), -10, inplace=True)
 df["rating"] = ratings
 df.to_csv(f"{dir}scholes_cleaned_metric_output.csv", index=False)

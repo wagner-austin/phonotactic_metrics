@@ -3,6 +3,8 @@ library(tidyverse)
 library(lme4)
 library(lmerTest)
 
+rm(list=ls())
+
 setwd("C:/hplaptop/4thYearUCI/PhonotacticsResearch/scholes")
 
 scholes_data <- read_csv("scholes_cleaned_metric_output.csv")
