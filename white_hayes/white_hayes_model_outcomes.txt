@@ -1,5 +1,7 @@
 Training data: English CMU with frequencies
 Test data: White/Hayes data
+    - For usage in phonotactics calculator, use white_hayes_cleaned_fixed_test_data.csv
+
 Results based on modified ARPABET column with fixes: 
 'T W I K AH N' -> 'T W IH K AH N' and 'C AH N IH F L' -> 'K AH N IH F L'
 
@@ -12,3 +14,15 @@ pos_uni_bi_freq_model         4.428116 -0.02099457 0.1836667     -0.009247212 13
 pos_uni_bi_freq_smooth_model  4.427970 -0.02088508 0.1830678     -0.009064299 13009.36 13047.99 -6498.682
 pos_uni_bi_model              4.430599 -0.03756240 0.1975353     -0.012037464 13013.83 13052.45 -6500.913
 pos_uni_bi_smooth_model       4.430150 -0.03709076 0.1955276     -0.011474266 13014.93 13053.56 -6501.467
+
+Results after removing rows with N/A ratings in original test data:
+
+                             intercept    uni_coef   bi_coef interaction_coef      AIC      BIC    logLik
+uni_bi_freq_smooth_model      4.401055 -0.35520689 0.5208289      0.028900104 12338.83 12377.45 -6163.414
+uni_bi_smoothed_model         4.396354 -0.40474025 0.5568451      0.033377915 12346.60 12385.23 -6167.302
+uni_bi_model                  4.396913 -0.10848401 0.2948930      0.074923571 12713.94 12752.56 -6350.968
+uni_bi_freq_model             4.397589 -0.10699443 0.2936693      0.073741113 12715.45 12754.07 -6351.724
+pos_uni_bi_freq_model         4.428233 -0.02100862 0.1837493     -0.009254983 13009.03 13047.65 -6498.514
+pos_uni_bi_freq_smooth_model  4.428086 -0.02089899 0.1831515     -0.009071982 13009.36 13047.99 -6498.682
+pos_uni_bi_model              4.430715 -0.03758384 0.1976196     -0.012047203 13013.83 13052.45 -6500.913
+pos_uni_bi_smooth_model       4.430266 -0.03711171 0.1956148     -0.011483746 13014.93 13053.56 -6501.467

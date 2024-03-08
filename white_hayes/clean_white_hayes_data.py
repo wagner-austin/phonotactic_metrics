@@ -3,7 +3,7 @@ import pandas as pd
 dir = "white_hayes/"
 
 # Clean test data
-df = pd.read_csv(f"{dir}white_hayes_2012.csv")
+df = pd.read_csv(f"{dir}white_hayes_2012.csv").dropna(subset="LogResponse")
 ratings = list(df["LogResponse"])
 subjects = list(df["Subject"])
 df["ARPA"].to_csv(f"{dir}white_hayes_cleaned_test_data.csv", header=False, index=False)

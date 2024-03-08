@@ -3,6 +3,8 @@ library(tidyverse)
 library(lme4)
 library(lmerTest)
 
+rm(list=ls())
+
 setwd("C:/hplaptop/4thYearUCI/PhonotacticsResearch/white_hayes")
 
 white_hayes_data <- read_csv("white_hayes_cleaned_metric_output.csv")
