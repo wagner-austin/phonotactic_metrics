@@ -84,8 +84,10 @@ def make_uni_bi_score_plot(data_path, uni_col, bi_col, response_col, save_path=N
     else:
         plt.show()
 
-def plots_driver(best_model_only=True):
-    datasets = ['albright', 'daland', 'needle', 'polish', 'scholes', 'spanish', 'turkish', 'white_hayes']
+def plots_driver(datasets='all', best_model_only=True):
+    all_datasets = ['albright', 'daland', 'needle', 'polish', 'scholes', 'spanish', 'turkish', 'white_hayes']
+    datasets = all_datasets if datasets == 'all' else datasets
+
     file_paths = {dataset : f"{dataset}/{dataset}_cleaned_metric_output.csv" for dataset in datasets}
     file_paths['polish'] = 'polish/cleaned_response_data.csv'
 
@@ -121,4 +123,4 @@ def plots_driver(best_model_only=True):
             make_uni_bi_score_plot(file_paths[dataset], uni_bi_columns[0], uni_bi_columns[1], rating_col, save_path)
 
 if __name__ == '__main__':
-    plots_driver(best_model_only=True)
+    plots_driver(datasets='all', best_model_only=True)
