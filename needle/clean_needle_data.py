@@ -23,15 +23,20 @@ with open(f'{dir}needle_orig_training.txt', 'r') as file:
         lines.append(' '.join(cmu_repr))
 with open(f'{dir}needle_cleaned_training.txt', 'w') as file:
     for line in lines:
-        file.write(line + "\n")
+        if len(line) != 0:
+            file.write(line + "\n")
 
 # Create test file
 df["cmu"].to_csv(f"{dir}needle_test_data.csv", header=False, index=False)
 
 # Clean metric output csv
-df_metric = pd.read_csv(f"{dir}needle_original_metric_output.csv")
-df_metric.replace(float('-inf'), -50, inplace=True)
-if "subject" not in df_metric.columns:
-    df_metric.insert(loc=0, column="subject", value=df["subjID"])
-df_metric["rating"] = df["rating"]
-df_metric.to_csv(f"{dir}needle_cleaned_metric_output.csv", index=False)
+def clean_metric_output(pre=''):
+    df_metric = pd.read_csv(f"{dir}{pre}needle_original_metric_output.csv")
+    df_metric.replace(float('-inf'), -50, inplace=True)
+    if "subject" not in df_metric.columns:
+        df_metric.insert(loc=0, column="subject", value=df["subjID"])
+    df_metric["rating"] = df["rating"]
+    df_metric.to_csv(f"{dir}{pre}needle_cleaned_metric_output.csv", index=False)
+
+clean_metric_output()
+clean_metric_output('new_')

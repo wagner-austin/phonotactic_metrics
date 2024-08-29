@@ -33,7 +33,11 @@ with open(f"{dir}scholes_cleaned_test_data.csv", "w") as file:
         file.write(onset + "\n")
 
 # Clean metric output csv
-df = pd.read_csv(f"{dir}scholes_original_metric_output.csv")
-df.replace(float('-inf'), -10, inplace=True)
-df["rating"] = ratings
-df.to_csv(f"{dir}scholes_cleaned_metric_output.csv", index=False)
+def clean_metric_output(pre=''):
+    df = pd.read_csv(f"{dir}{pre}scholes_original_metric_output.csv")
+    df.replace(float('-inf'), -10, inplace=True)
+    df["rating"] = ratings
+    df.to_csv(f"{dir}{pre}scholes_cleaned_metric_output.csv", index=False)
+
+clean_metric_output()
+clean_metric_output('new_')

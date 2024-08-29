@@ -5,8 +5,10 @@ library(lmerTest)
 
 setwd("C:/hplaptop/4thYearUCI/PhonotacticsResearch/needle")
 
-needle_data <- read_csv("needle_cleaned_metric_output.csv")
-needle_data[4:17] = scale(needle_data[4:17])
+# new file uses unigram smoothing, scale columns 4 to 19
+# if using original file, don't use "new_" prefix and scale columns 4 to 17
+needle_data <- read_csv("new_needle_cleaned_metric_output.csv")
+needle_data[4:19] = scale(needle_data[4:19])
 
 uni_bi_model = lmer(rating ~ uni_prob * bi_prob + (1|word) + (1|subject), data=needle_data)
 summary(uni_bi_model)
@@ -18,7 +20,8 @@ pos_uni_bi_smoothed_model = lmer(rating ~ pos_uni_score_smoothed * pos_bi_score_
                                      (1|word) + (1|subject), data = needle_data)
 summary(pos_uni_bi_smoothed_model)
 
-uni_bi_smoothed_model = lmer(rating ~ uni_prob * bi_prob_smoothed + (1|word) + (1|subject),
+# for original metric output, use uni_prob column instead of uni_prob_smoothed
+uni_bi_smoothed_model = lmer(rating ~ uni_prob_smoothed * bi_prob_smoothed + (1|word) + (1|subject),
                              data = needle_data)
 summary(uni_bi_smoothed_model)
 

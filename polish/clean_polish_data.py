@@ -38,7 +38,10 @@ with open(f"{dir}cleaned_polish_test_data.csv", 'w') as file:
 # Merge response data with test data orthography
 
 df = pd.read_csv(f"{dir}all_legit_data.csv")
-scores_df = pd.read_csv(f"{dir}output_scores.csv")
+# new_output_scores contains smoothed unigram probs (output_scores does not)
+# change pre to empty string '' to operate on original (no unigram smoothing) files
+pre = 'new_'
+scores_df = pd.read_csv(f"{dir}{pre}output_scores.csv")
 
 score_columns = list(scores_df.columns[2:])
 
@@ -50,4 +53,4 @@ df['ortho'] = df.apply(lambda row : head_to_ortho_dict[row['head']], axis=1)
 df[score_columns] = df.apply(lambda row : get_scores(row['ortho']), axis=1)
 df.replace(float('-inf'), -50, inplace=True)
 
-df.to_csv(f"{dir}cleaned_response_data.csv")
+df.to_csv(f"{dir}{pre}cleaned_response_data.csv")

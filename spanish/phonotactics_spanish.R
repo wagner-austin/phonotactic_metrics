@@ -3,10 +3,14 @@ library(tidyverse)
 library(lme4)
 library(lmerTest)
 
+rm(list = ls())
+
 setwd("C:/hplaptop/4thYearUCI/PhonotacticsResearch/spanish")
 
-spanish_data <- read_csv("spanish_cleaned_metric_output.csv")
-spanish_data[5:18] = scale(spanish_data[5:18])
+# new file uses unigram smoothing, scale columns 5 to 20
+# if using original file, don't use "new_" prefix and scale columns 5 to 18
+spanish_data <- read_csv("new_spanish_cleaned_metric_output.csv")
+spanish_data[5:20] = scale(spanish_data[5:20])
 
 uni_bi_model = lmer(response ~ uni_prob * bi_prob + (1|word) + (1|ID), data=spanish_data)
 summary(uni_bi_model)
@@ -18,14 +22,16 @@ pos_uni_bi_smoothed_model = lmer(response ~ pos_uni_score_smoothed * pos_bi_scor
                                      (1|word) + (1|ID), data = spanish_data)
 summary(pos_uni_bi_smoothed_model)
 
-uni_bi_smoothed_model = lmer(response ~ uni_prob * bi_prob_smoothed + (1|word) + (1|ID),
+# for original metric output, use uni_prob column instead of uni_prob_smoothed
+uni_bi_smoothed_model = lmer(response ~ uni_prob_smoothed * bi_prob_smoothed + (1|word) + (1|ID),
                              data = spanish_data)
 summary(uni_bi_smoothed_model)
 
 uni_bi_freq_model = lmer(response ~ uni_prob_freq_weighted * bi_prob_freq_weighted + (1|ID), data=spanish_data)
 summary(uni_bi_freq_model)
 
-uni_bi_freq_smooth_model = lmer(response ~ uni_prob_freq_weighted * bi_prob_freq_weighted_smoothed + (1|ID), data=spanish_data)
+# for original metric output, use uni_prob_freq_weighted column instead of uni_prob_freq_weighted_smoothed
+uni_bi_freq_smooth_model = lmer(response ~ uni_prob_freq_weighted_smoothed * bi_prob_freq_weighted_smoothed + (1|ID), data=spanish_data)
 summary(uni_bi_freq_smooth_model)
 
 pos_uni_bi_freq_model = lmer(response ~ pos_uni_score_freq_weighted * pos_bi_score_freq_weighted + (1|ID), data=spanish_data)

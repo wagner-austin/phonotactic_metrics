@@ -1,4 +1,4 @@
-Training data: Dataset used by Needle paper (see needle-cmu-train.txt)
+Training data: Dataset used by Needle paper (see needle_orig_training.txt)
 Test data: Needle data
 
                           intercept   uni_coef   bi_coef interaction_coef      AIC      BIC    logLik
@@ -6,3 +6,11 @@ uni_bi_smoothed_model      2.366731 -0.8971812 1.3033570       0.36893286 567744
 uni_bi_model               2.407682 -0.3797821 0.7496555       0.34032865 568349.1 568420.6 -284167.5
 pos_uni_bi_model           2.767541 -0.1613208 0.2743793      -0.06534974 570113.7 570185.2 -285049.9
 pos_uni_bi_smoothed_model  2.767438 -0.1612551 0.2741512      -0.06520308 570114.1 570185.6 -285050.1
+
+Model outcomes after introducing unigram smoothing:
+
+                          intercept    uni_coef   bi_coef interaction_coef      AIC      BIC    logLik
+uni_bi_model               2.722119  0.05902557 0.5466166     -0.008468666 566148.8 566220.3 -283067.4
+uni_bi_smoothed_model      2.662016 -0.32280560 0.6988263      0.087224855 566288.5 566360.0 -283137.2
+pos_uni_bi_smoothed_model  2.792805 -0.16563023 0.3362016     -0.100433188 570030.7 570102.2 -285008.3
+pos_uni_bi_model           2.794345 -0.15023723 0.3205289     -0.102715455 570084.3 570155.8 -285035.2
