@@ -1,3 +1,15 @@
+# phonotactics_daland.R - Linear regression models for phonotactic scores
+# -------------------------------------------------------------------------
+# This module fits 16 linear regression models based on various combinations of:
+#   - Model Category: Positional vs. Non-Positional
+#   - Normalization: Conditional vs. Joint
+#   - Word Boundaries: With (wb) vs. Without (noWB)
+#   - Aggregation: Sum vs. Product (log-product)
+#
+# Predictors are constructed from associated unigram and bigram score columns.
+#
+# Version: 1.0.1
+
 library(readr)
 library(ggplot2)
 library(MASS)
@@ -5,72 +17,133 @@ library(ordinal)
 
 rm(list=ls())
 
+# Set working directory (update as needed)
 setwd("C:/hplaptop/4thYearUCI/PhonotacticsResearch/daland")
 
-# new file uses unigram smoothing, scale columns 3 to 18
-# if using original file, don't use "new_" prefix and scale columns 3 to 16
+# Read in data and scale predictor columns.
+# If using the new file with smoothing, scale columns 3 to 18.
+# For the original file, do not use the "new_" prefix and scale columns 3 to 16.
 daland_data <- read_csv("new_daland_cleaned_metric_output.csv")
-daland_data[3:18] = scale(daland_data[3:18])
+daland_data[3:18] <- scale(daland_data[3:18])
 
-uni_bi_model = glm(rating ~ uni_prob * bi_prob, data=daland_data)
-summary(uni_bi_model)
-
-pos_uni_bi_model = glm(rating ~ pos_uni_score * pos_bi_score, data = daland_data)
-summary(pos_uni_bi_model)
-
-pos_uni_bi_smoothed_model = glm(rating ~ pos_uni_score_smoothed * pos_bi_score_smoothed, 
-                                 data = daland_data)
-summary(pos_uni_bi_smoothed_model)
-
-# for original metric output, use uni_prob column instead of uni_prob_smoothed
-uni_bi_smoothed_model = glm(rating ~ uni_prob_smoothed * bi_prob_smoothed, data = daland_data)
-summary(uni_bi_smoothed_model)
-
-uni_bi_freq_model = glm(rating ~ uni_prob_freq_weighted * bi_prob_freq_weighted, data=daland_data)
-summary(uni_bi_freq_model)
-
-# for original metric output, use uni_prob_freq_weighted column instead of uni_prob_freq_weighted_smoothed
-uni_bi_freq_smooth_model = glm(rating ~ uni_prob_freq_weighted_smoothed * bi_prob_freq_weighted_smoothed,
-                             data=daland_data)
-summary(uni_bi_freq_smooth_model)
-
-pos_uni_bi_freq_model = glm(rating ~ pos_uni_score_freq_weighted * pos_bi_score_freq_weighted,
-                             data=daland_data)
-summary(pos_uni_bi_freq_model)
-
-pos_uni_bi_freq_smoothed_model = glm(rating ~ pos_uni_score_freq_weighted_smoothed * pos_bi_score_freq_weighted_smoothed,
-                                      data=daland_data)
-summary(pos_uni_bi_freq_smoothed_model)
-
-all_model_names = vector()
-all_models = vector()
-for (var in ls()) {
-    if (endsWith(var, "model")) {
-        all_model_names = append(all_model_names, var)
-        all_models = append(all_models, get(var))
+# ------------------------------------------------------------------------------
+# Define model configurations for 16 linear regression models.
+# ------------------------------------------------------------------------------
+configs <- list()
+for (model_category in c("nonpos", "pos")) {
+  for (norm in c("conditional", "joint")) {
+    for (bound in c("wb", "noWB")) {
+      for (agg in c("sum", "prod")) {
+        
+        # Construct a unique model name based on the combination.
+        model_name <- paste(model_category, norm, bound, agg, sep = "_")
+        
+        # Determine the unigram predictor column.
+        if (model_category == "nonpos") {
+          if (norm == "conditional") {
+            uni <- "uni_prob"
+          } else {  # joint
+            uni <- "uni_joint_nonpos"
+          }
+        } else {  # positional models
+          if (norm == "conditional") {
+            uni <- if (agg == "sum") "pos_uni_score_cond" else "pos_uni_score_cond_prod"
+          } else {  # joint
+            uni <- if (agg == "sum") "pos_uni_score" else "pos_uni_score_prod"
+          }
+        }
+        
+        # Determine the bigram predictor column.
+        if (model_category == "nonpos") {
+          if (norm == "conditional") {
+            bi <- if (bound == "wb") "bi_cond_nonpos_wb" else "bi_cond_nonpos_noWB"
+          } else {  # joint
+            bi <- if (bound == "wb") "bi_joint_nonpos_wb" else "bi_joint_nonpos_noWB"
+          }
+        } else {  # positional models
+          if (norm == "conditional") {
+            bi <- if (bound == "wb") "bi_cond_pos_wb" else "bi_cond_pos_noWB"
+          } else {  # joint
+            bi <- if (bound == "wb") "bi_joint_pos_wb" else "bi_joint_pos_noWB"
+          }
+        }
+        
+        # For non-positional models, if aggregation is product, append "_prod"
+        # (For positional models the column names already incorporate the aggregation type.)
+        if (agg == "prod" && model_category == "nonpos") {
+          if (!grepl("_prod$", uni)) {
+            uni <- paste0(uni, "_prod")
+          }
+          if (!grepl("_prod$", bi)) {
+            bi <- paste0(bi, "_prod")
+          }
+        }
+        
+        configs[[model_name]] <- list(uni = uni, bi = bi)
+      }
     }
+  }
 }
 
-num_models = length(all_model_names)
-
-intercept = vector(mode="numeric", length=num_models)
-uni_coef = vector(mode="numeric", length=num_models)
-bi_coef = vector(mode="numeric", length=num_models)
-interaction_coef = vector(mode="numeric", length=num_models)
-AIC = vector(mode="numeric", length=num_models)
-
-for (index in 1:num_models) {
-    coef_index = 30*(index-1) + 1
-    aic_index = 30*(index-1) + 11
-    intercept[index] = all_models[[coef_index]][1]
-    uni_coef[index] = all_models[[coef_index]][2]
-    bi_coef[index] = all_models[[coef_index]][3]
-    interaction_coef[index] = all_models[[coef_index]][4]
-    AIC[index] = all_models[[aic_index]]
+# ------------------------------------------------------------------------------
+# Function: fit_models
+# Purpose: Fit all linear regression models based on configurations.
+# Returns: A named list of fitted glm model objects.
+# ------------------------------------------------------------------------------
+fit_models <- function(data, configs) {
+  models <- list()
+  for (name in names(configs)) {
+    uni_col <- configs[[name]]$uni
+    bi_col  <- configs[[name]]$bi
+    formula_str <- paste("rating ~", uni_col, "*", bi_col)
+    models[[name]] <- glm(as.formula(formula_str), data = data)
+    cat("Fitted model:", name, "\n")
+  }
+  return(models)
 }
 
-df = data.frame(intercept, uni_coef, bi_coef, interaction_coef, AIC, row.names=all_model_names)
-df
+# ------------------------------------------------------------------------------
+# Function: extract_model_summary
+# Purpose: Extract coefficients and AIC from each model in a robust manner.
+# Returns: A data frame with model names, coefficients, and AIC.
+# ------------------------------------------------------------------------------
+extract_model_summary <- function(models_list) {
+  summaries <- lapply(models_list, function(mod) {
+    coefs <- coef(mod)
+    list(
+      intercept = ifelse(length(coefs) >= 1, coefs[1], NA),
+      uni_coef = ifelse(length(coefs) >= 2, coefs[2], NA),
+      bi_coef = ifelse(length(coefs) >= 3, coefs[3], NA),
+      interaction_coef = ifelse(length(coefs) >= 4, coefs[4], NA),
+      AIC = AIC(mod)
+    )
+  })
+  
+  df <- do.call(rbind, lapply(names(summaries), function(nm) {
+    data.frame(
+      model = nm,
+      intercept = summaries[[nm]]$intercept,
+      uni_coef = summaries[[nm]]$uni_coef,
+      bi_coef = summaries[[nm]]$bi_coef,
+      interaction_coef = summaries[[nm]]$interaction_coef,
+      AIC = summaries[[nm]]$AIC,
+      row.names = NULL,
+      stringsAsFactors = FALSE
+    )
+  }))
+  return(df)
+}
 
-sorted_df = df[order(df$AIC),]
-sorted_df
+# ------------------------------------------------------------------------------
+# Fit the models and extract summaries.
+# ------------------------------------------------------------------------------
+models_list <- fit_models(daland_data, configs)
+model_summary_df <- extract_model_summary(models_list)
+
+cat("All model coefficients and AIC:\n")
+print(model_summary_df)
+
+# Sort models by AIC and display the sorted data frame.
+sorted_df <- model_summary_df[order(model_summary_df$AIC), ]
+cat("Models sorted by AIC:\n")
+print(sorted_df)
